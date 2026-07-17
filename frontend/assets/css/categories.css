@@ -1,0 +1,140 @@
+/* ======================================
+   CATEGORÍAS
+====================================== */
+
+.table-section{
+
+    background:#fff;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+/* ======================================
+   TABLA
+====================================== */
+
+.table{
+
+    margin-bottom:0;
+
+}
+
+.table thead{
+
+    background:#f8f9fa;
+
+}
+
+.table thead th{
+
+    font-weight:600;
+
+    color:#495057;
+
+    border:none;
+
+}
+
+.table td{
+
+    vertical-align:middle;
+
+}
+
+.table tbody tr{
+
+    transition:.3s;
+
+}
+
+.table tbody tr:hover{
+
+    background:#f5f9ff;
+
+}
+
+/* ======================================
+   BOTONES
+====================================== */
+
+.btn-sm{
+
+    width:38px;
+
+    height:38px;
+
+    padding:0;
+
+    margin-right:5px;
+
+    border-radius:8px;
+
+}
+
+.btn-warning{
+
+    color:#fff;
+
+}
+
+.btn-warning:hover{
+
+    color:#fff;
+
+}
+
+/* ======================================
+   MODAL
+====================================== */
+
+.modal-content{
+
+    border:none;
+
+    border-radius:18px;
+
+}
+
+.modal-header{
+
+    border-bottom:1px solid #eee;
+
+}
+
+.modal-footer{
+
+    border-top:1px solid #eee;
+
+}
+
+.modal label{
+
+    font-weight:500;
+
+}
+
+.modal input,
+.modal textarea{
+
+    border-radius:10px;
+
+}
+
+/* ======================================
+   RESPONSIVE
+====================================== */
+
+@media(max-width:768px){
+
+.table{
+
+font-size:14px;
+
+}
+
+}
