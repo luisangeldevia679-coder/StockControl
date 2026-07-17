@@ -118,6 +118,15 @@
             </button>
 
         </nav>
+        <div class="mb-3">
+
+    <input
+        type="text"
+        id="buscarCategoria"
+        class="form-control"
+        placeholder="Buscar categoría...">
+
+</div>
 
         <div class="table-section">
 
@@ -130,3 +139,93 @@
                         <th>ID</th>
 
                         <th>Nombre</th>
+<!-- Modal Nueva Categoría -->
+
+<div class="modal fade" id="modalCategoria" tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+
+                    Nueva Categoría
+
+                </h5>
+
+                <button
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <form id="categoryForm">
+
+                    <div class="mb-3">
+
+                        <label>
+
+                            Nombre
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label>
+
+                            Descripción
+
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            required>
+
+                        </textarea>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Cancelar
+
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    type="submit"
+                    form="categoryForm">
+
+                    Guardar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    
