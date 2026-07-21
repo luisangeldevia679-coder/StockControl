@@ -40,112 +40,7 @@ searchInput.addEventListener("keyup", () => {
 
 });
 
-// ------------------------------
-// ABRIR MODAL
-// ------------------------------
 
-addButton.addEventListener("click", () => {
-
-    productForm.reset();
-
-    productModal.show();
-
-});
-
-// ------------------------------
-// AGREGAR PRODUCTO
-// ------------------------------
-
-productForm.addEventListener("submit", (e) => {
-
-    e.preventDefault();
-
-    const inputs =
-        productForm.querySelectorAll("input");
-
-    const selects =
-        productForm.querySelectorAll("select");
-
-    const nombre =
-        inputs[0].value;
-
-    const categoria =
-        selects[0].value;
-
-    const precio =
-        inputs[1].value;
-
-    const stock =
-        inputs[2].value;
-
-    if (
-        nombre === "" ||
-        categoria === "Seleccione" ||
-        precio === "" ||
-        stock === ""
-    ) {
-
-        alert(
-            "Complete todos los campos."
-        );
-
-        return;
-
-    }
-
-    const tbody =
-        document.querySelector("tbody");
-
-    const fila =
-        document.createElement("tr");
-
-    fila.innerHTML = `
-
-        <td>P00${tbody.children.length + 1}</td>
-
-        <td>${nombre}</td>
-
-        <td>${categoria}</td>
-
-        <td>$${Number(precio).toLocaleString()}</td>
-
-        <td>${stock}</td>
-
-        <td>
-
-            <span class="badge bg-success">
-
-                Disponible
-
-            </span>
-
-        </td>
-
-        <td>
-
-            <button class="btn btn-warning btn-sm edit">
-
-                <i class="fa-solid fa-pen"></i>
-
-            </button>
-
-            <button class="btn btn-danger btn-sm delete">
-
-                <i class="fa-solid fa-trash"></i>
-
-            </button>
-
-        </td>
-
-    `;
-
-    tbody.appendChild(fila);
-
-    productModal.hide();
-
-    alert("Producto agregado correctamente.");
-
-});
 // ======================================
 // EDITAR PRODUCTO
 // ======================================
@@ -224,8 +119,6 @@ document.addEventListener("click", (e) => {
                 </span>`;
 
         }
-
-        productModal.hide();
 
         alert("Producto actualizado correctamente.");
 

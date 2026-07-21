@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nuevo Producto | StockControl ERP</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- FontAwesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="../../assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="../../assets/css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="../../assets/css/products.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-boxes-stacked"></i>
+
+            <h2>StockControl</h2>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="../dashboard/dashboard.html">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="products.html">
+
+                    <i class="fa-solid fa-box"></i>
+
+                    Productos
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../categories/categories.html">
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                    Categorías
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../suppliers/suppliers.html">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    Proveedores
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Contenido -->
+
+    <main class="content">
+
+        <nav class="topbar">
+
+            <div>
+
+                <h3>
+
+                    Nuevo Producto
+
+                </h3>
+
+                <span>
+
+                    Registra un nuevo producto en el inventario.
+
+                </span>
+
+            </div>
+
+            <a href="products.html"
+               class="btn btn-secondary">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Volver
+
+            </a>
+
+        </nav>
+
+<div class="container-fluid mt-4">
+
+    <div class="row">
+
+        <!-- ==========================
+             FORMULARIO
+        =========================== -->
+
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h5 class="mb-0">
+
+                        <i class="fa-solid fa-box-open"></i>
+
+                        Información del Producto
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <form id="productForm">
+
+                        <div class="row">
+
+                            <!-- Nombre -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Nombre del Producto
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="productName"
+                                    name="name"
+                                    placeholder="Ej. Mouse Logitech G203"
+                                    required>
+
+                            </div>
+
+                            <!-- Código -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Código
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="productCode"
+                                    name="code"
+                                    readonly>
+
+                            </div>
+
+                            <!-- Categoría -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Categoría
+
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="category"
+                                    name="category"
+                                    required>
+
+                                    <option value="">Seleccione...</option>
+
+                                    <option>Periféricos</option>
+
+                                    <option>Componentes</option>
+
+                                    <option>Monitores</option>
+
+                                    <option>Almacenamiento</option>
+
+                                </select>
+
+                            </div>
+
+                            <!-- Proveedor -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Proveedor
+
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="supplier"
+                                    name="supplier"
+                                    required>
+
+                                    <option value="">Seleccione...</option>
+
+                                    <option>Logitech</option>
+
+                                    <option>Kingston</option>
+
+                                    <option>Samsung</option>
+
+                                    <option>HP</option>
+
+                                </select>
+
+                            </div>
+
+                            <!-- Precio Compra -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    Precio Compra
+
+                                </label>
+
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="purchasePrice"
+                                    name="purchasePrice"
+                                    min="0"
+                                    step="0.01"
+                                    required>
+
+                            </div>
+
+                            <!-- Precio Venta -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    Precio Venta
+
+                                </label>
+
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="salePrice"
+                                    name="salePrice"
+                                    min="0"
+                                    step="0.01"
+                                    required>
+
+                            </div>
+
+                            <!-- Stock -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    Stock Inicial
+
+                                </label>
+
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="stock"
+                                    name="stock"
+                                    min="0"
+                                    required>
+
+                            </div> 
+                            <!-- Imagen -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Imagen del Producto
+
+                                </label>
+
+                                <input
+                                    type="file"
+                                    class="form-control"
+                                    id="productImage"
+                                    name="image"
+                                    accept="image/*">
+
+                                <small class="text-muted">
+
+                                    Formatos permitidos: JPG, PNG, WEBP.
+
+                                </small>
+
+                            </div>
+
+                            <!-- Estado -->
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Estado
+
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="status">
+
+                                    <option value="Activo">
+
+                                        Activo
+
+                                    </option>
+
+                                    <option value="Inactivo">
+
+                                        Inactivo
+
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <!-- Descripción -->
+
+                            <div class="col-12 mb-3">
+
+                                <label class="form-label">
+
+                                    Descripción
+
+                                </label>
+
+                                <textarea
+
+                                    class="form-control"
+
+                                    id="description"
+
+                                    rows="5"
+
+                                    placeholder="Describe las características del producto...">
+
+                                </textarea>
+
+                            </div>
+
+                        </div>
+                        
+                        <!-- ======================================
+                            INFORMACIÓN COMERCIAL
+                        ====================================== -->
+
+                        <div class="row mt-4">
+
+                            <div class="col-12">
+
+                                <h5 class="border-bottom pb-2 mb-4">
+
+                                    <i class="fa-solid fa-chart-line text-primary"></i>
+
+                                    Información Comercial
+
+                                </h5>
+
+                            </div>
+
+                            <!-- SKU -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    SKU
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="sku"
+                                    readonly>
+
+                            </div>
+
+                            <!-- Código de barras -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    Código de Barras
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="barcode"
+                                    placeholder="7701234567890">
+
+                            </div>
+
+                            <!-- Unidad -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    Unidad de Medida
+
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="unit">
+
+                                    <option value="Unidad">Unidad</option>
+
+                                    <option value="Caja">Caja</option>
+
+                                    <option value="Paquete">Paquete</option>
+
+                                    <option value="Kilogramo">Kilogramo</option>
+
+                                    <option value="Litro">Litro</option>
+
+                                </select>
+
+                            </div>
+
+                            <!-- Stock mínimo -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    Stock Mínimo
+
+                                </label>
+
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="minimumStock"
+                                    value="5">
+
+                            </div>
+
+                            <!-- Stock máximo -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    Stock Máximo
+
+                                </label>
+
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="maximumStock"
+                                    value="100">
+
+                            </div>
+
+                            <!-- IVA -->
+
+                            <div class="col-md-4 mb-3">
+
+                                <label class="form-label">
+
+                                    IVA
+
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="tax">
+
+                                    <option value="0">0%</option>
+
+                                    <option value="5">5%</option>
+
+                                    <option value="19" selected>19%</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <!-- ======================================
+                            UBICACIÓN EN BODEGA
+                        ====================================== -->
+
+                        <div class="row mt-3">
+
+                            <div class="col-12">
+
+                                <h5 class="border-bottom pb-2 mb-4">
+
+                                    <i class="fa-solid fa-warehouse text-primary"></i>
+
+                                    Ubicación del Producto
+
+                                </h5>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Bodega
+
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="warehouse">
+
+                                    <option>Bodega Principal</option>
+
+                                    <option>Bodega Norte</option>
+
+                                    <option>Bodega Sur</option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Estante
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="shelf"
+                                    placeholder="Ej. A-05">
+
+                            </div>
+
+                        </div>
+                        <hr>
+
+                        <div class="d-flex justify-content-end gap-2">
+
+                            <a
+                                href="products.html"
+                                class="btn btn-outline-secondary">
+
+                                <i class="fa-solid fa-xmark"></i>
+
+                                Cancelar
+
+                            </a>
+
+                            <button
+                                type="reset"
+                                class="btn btn-warning">
+
+                                <i class="fa-solid fa-rotate-left"></i>
+
+                                Limpiar
+
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary">
+
+                                <i class="fa-solid fa-floppy-disk"></i>
+
+                                Guardar Producto
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div> <!-- Fin card -->
+
+    </div> <!-- Fin col-lg-8 -->
+
+<!-- ==========================
+     RESUMEN
+========================== -->
+
+<div class="col-lg-4">
+
+    <div class="card shadow border-0">
+
+        <div class="card-header bg-dark text-white">
+
+            <h5>
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                Resumen
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="text-center mb-4">
+
+                <img
+
+                    id="previewImage"
+
+                    src="../../assets/images/products/default-product.png"
+
+                    class="img-fluid rounded"
+
+                    style="max-height:220px;object-fit:cover;">
+
+            </div>
+
+            <table class="table">
+
+                <tr>
+
+                    <th>Código</th>
+
+                    <td id="summaryCode">
+
+                        PRD-0001
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <th>SKU</th>
+
+                    <td id="summarySku">
+
+                        SKU-0001
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Estado</th>
+
+                    <td id="summaryStatus">
+
+                        <span class="badge bg-success">
+
+                            Activo
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                    <th>Margen</th>
+
+                    <td id="summaryMargin">
+
+                        $0
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Inventario</th>
+
+                    <td id="summaryInventory">
+
+                        $0
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>   
+</main>
+
+</div>
+
+<script src="../../assets/js/create-product.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>                               
