@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Categorías | StockControl ERP</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/categories.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-boxes-stacked"></i>
+
+            <h2>StockControl</h2>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="../dashboard/dashboard.html">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../products/products.html">
+
+                    <i class="fa-solid fa-box"></i>
+
+                    Productos
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="#">
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                    Categorías
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../suppliers/suppliers.html">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    Proveedores
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- CONTENIDO -->
+
+    <main class="content">
+
+        <nav class="topbar">
+
+            <div>
+
+                <h3>Gestión de Categorías</h3>
+
+                <span>Organiza los productos por categorías.</span>
+
+            </div>
+
+            <button
+                class="btn btn-primary"
+                id="btnNuevaCategoria">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Nueva Categoría
+
+            </button>
+
+        </nav>
+        <div class="mb-3">
+
+    <input
+        type="text"
+        id="buscarCategoria"
+        class="form-control"
+        placeholder="Buscar categoría...">
+
+</div>
+
+        <div class="table-section">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Nombre</th>
+<!-- Modal Nueva Categoría -->
+
+<div class="modal fade" id="modalCategoria" tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+
+                    Nueva Categoría
+
+                </h5>
+
+                <button
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <form id="categoryForm">
+
+                    <div class="mb-3">
+
+                        <label>
+
+                            Nombre
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label>
+
+                            Descripción
+
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="4"
+                            required>
+
+                        </textarea>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Cancelar
+
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    type="submit"
+                    form="categoryForm">
+
+                    Guardar
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    
