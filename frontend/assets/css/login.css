@@ -1,0 +1,372 @@
+/* ==========================
+   GOOGLE FONT
+========================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================
+   VARIABLES
+========================== */
+
+:root{
+
+    --primary:#2563EB;
+    --primaryHover:#1D4ED8;
+    --secondary:#0F172A;
+    --white:#FFFFFF;
+    --background:#F1F5F9;
+    --gray:#64748B;
+    --border:#CBD5E1;
+    --shadow:0 20px 50px rgba(15,23,42,.20);
+
+}
+
+/* ==========================
+   RESET
+========================== */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:
+    linear-gradient(135deg,#0F172A,#1E3A8A,#2563EB);
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+/* ==========================
+   CONTENEDOR
+========================== */
+
+.login-container{
+
+    width:100%;
+    padding:25px;
+
+}
+
+/* ==========================
+   TARJETA
+========================== */
+
+.login-card{
+
+    width:100%;
+    max-width:450px;
+
+    margin:auto;
+
+    padding:45px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    box-shadow:var(--shadow);
+
+}
+
+/* ==========================
+   LOGO
+========================== */
+
+.logo{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+.logo i{
+
+    font-size:70px;
+
+    color:#60A5FA;
+
+}
+
+.logo h2{
+
+    color:white;
+
+    margin-top:15px;
+
+    font-weight:700;
+
+}
+
+.logo p{
+
+    color:#CBD5E1;
+
+    font-size:14px;
+
+}
+
+/* ==========================
+   INPUTS
+========================== */
+
+.input-group{
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+}
+
+.input-group-text{
+
+    background:white;
+
+    border:none;
+
+}
+
+.input-group i{
+
+    color:var(--primary);
+
+}
+
+.form-control{
+
+    border:none;
+
+    padding:15px;
+
+    font-size:15px;
+
+}
+
+.form-control:focus{
+
+    box-shadow:none;
+
+}
+
+/* ==========================
+   OPCIONES
+========================== */
+
+.options{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:14px;
+
+    color:white;
+
+}
+
+.options a{
+
+    color:#93C5FD;
+
+    text-decoration:none;
+
+}
+
+.options a:hover{
+
+    color:white;
+
+}
+
+/* ==========================
+   BOTÓN LOGIN
+========================== */
+
+.btn-login{
+
+    width:100%;
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btn-login:hover{
+
+    background:var(--primaryHover);
+
+    transform:translateY(-3px);
+
+}
+
+/* ==========================
+   DIVIDER
+========================== */
+
+.divider{
+
+    text-align:center;
+
+    margin:30px 0;
+
+    position:relative;
+
+}
+
+.divider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:100%;
+
+    height:1px;
+
+    background:rgba(255,255,255,.2);
+
+    left:0;
+
+    top:50%;
+
+}
+
+.divider span{
+
+    background:rgba(15,23,42,.8);
+
+    color:white;
+
+    padding:0 15px;
+
+    position:relative;
+
+}
+
+/* ==========================
+   BOTÓN REGISTRO
+========================== */
+
+.btn-register{
+
+    width:100%;
+
+    border:2px solid white;
+
+    color:white;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    display:block;
+
+    transition:.3s;
+
+}
+
+.btn-register:hover{
+
+    background:white;
+
+    color:#0F172A;
+
+}
+
+/* ==========================
+   VOLVER
+========================== */
+
+.back-home{
+
+    text-align:center;
+
+    margin-top:30px;
+
+}
+
+.back-home a{
+
+    color:#CBD5E1;
+
+    text-decoration:none;
+
+}
+
+.back-home a:hover{
+
+    color:white;
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:576px){
+
+.login-card{
+
+padding:30px 25px;
+
+}
+
+.logo i{
+
+font-size:55px;
+
+}
+
+.logo h2{
+
+font-size:28px;
+
+}
+
+.options{
+
+flex-direction:column;
+
+gap:15px;
+
+align-items:flex-start;
+
+}
+
+}
