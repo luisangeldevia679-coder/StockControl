@@ -46,3 +46,50 @@ const deleteById = (id) => {
     }
     return false;
 };
+
+export const categoryService from '../service/categoryService.js';
+
+// Obtener todas las categorías
+const getAllCategories = (req, res) => {
+    const lista = categoryService.getAll();
+    res.json(lista);
+};
+
+// Obtener una sola categoría por su ID
+const getCategoryById = (req, res) => {
+    const id = req.params.id;
+    const categoria = categoryService.getById(id);
+
+    if (!categoria) {
+        return res.status(404).json({ mensaje: "Categoría no encontrada" });
+    }
+    res.json(categoria);
+};
+
+// Crear una categoría
+const createCategory = (req, res) => {
+    const nueva = categoryService.createNew(req.body);
+    res.status(201).json({ mensaje: "Creada con éxito", data: nueva });
+};
+
+// Actualizar una categoría
+const updateCategory = (req, res) => {
+    const id = req.params.id;
+    const actualizada = categoryService.updateExisting(id, req.body);
+
+    if (!actualizada) {
+        return res.status(404).json({ mensaje: "No se pudo actualizar" });
+    }
+    res.json({ mensaje: "Actualizada con éxito", data: actualizada });
+};
+
+// Eliminar una categoría
+const deleteCategory = (req, res) => {
+    const id = req.params.id;
+    const exito = categoryService.remove(id);
+
+    if (!exito) {
+        return res.status(404).json({ mensaje: "No se encontró para eliminar" });
+    }
+    res.json({ mensaje: "Eliminada con éxito" });
+};
