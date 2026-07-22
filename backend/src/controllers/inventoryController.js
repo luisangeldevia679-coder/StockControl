@@ -86,17 +86,3 @@ module.exports = {
     handleTransaction,
     getInventoryLog
 };
-
-
-const express = require('express');
-const router = express.Router();
-const { handleTransaction, getInventoryLog } = require('../controllers/inventoryController');
-const authMiddleware = require('../middlewares/authMiddleware');
-
-// Registrar entrada o salida
-router.post('/transaction', authMiddleware, handleTransaction);
-
-// Consultar el historial de movimientos
-router.get('/log', authMiddleware, getInventoryLog);
-
-module.exports = router;
