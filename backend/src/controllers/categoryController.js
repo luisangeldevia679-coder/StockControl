@@ -47,7 +47,7 @@ const deleteById = (id) => {
     return false;
 };
 
-export const categoryService from '../service/categoryService.js';
+const categoryService = require('../services/categoryService.js');
 
 // Obtener todas las categorías
 const getAllCategories = (req, res) => {
@@ -92,4 +92,11 @@ const deleteCategory = (req, res) => {
         return res.status(404).json({ mensaje: "No se encontró para eliminar" });
     }
     res.json({ mensaje: "Eliminada con éxito" });
+};
+
+module.exports = {
+    deleteCategory,
+    getAllCategories,
+    createCategory,
+    updateCategory
 };

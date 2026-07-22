@@ -148,3 +148,5 @@ if (usuario) {
             usuario.email || "admin@stockcontrol.com";
 
     }
+
+}

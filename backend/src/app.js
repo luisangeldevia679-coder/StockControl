@@ -4,6 +4,11 @@ const cors = require('cors'); // ¡Para conectar con el frontend!
 // 1. Importar tus rutas
 const categoryRoutes = require('./routes/categoryRoutes');
 const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
+const supplierRoutes = require('./routes/supplierRoutes');
+const inventoryRoutes = require('./routes/inventoryRoutes');
+const errorMiddleware = require('./middlewares/errorMiddleware');
 
 const app = express();
 
@@ -16,6 +21,12 @@ app.use(express.json()); // Permite leer los datos enviados en formato JSON
 // debe ser manejada por las rutas que importamos.
 app.use('/api/categories', categoryRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/suppliers', supplierRoutes);
+app.use('/api/inventory', inventoryRoutes);
+
+app.use(errorMiddleware);
 
 // 4. Exportar o inicializar la app
 module.exports = app; 

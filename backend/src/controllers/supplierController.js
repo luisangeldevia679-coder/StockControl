@@ -1,4 +1,4 @@
-const Supplier = require('../models/supplier');
+const Supplier = require('../models/Supplier');
 
 // Base de datos temporal en memoria para proveedores
 let tempSuppliersDb = [
@@ -64,17 +64,3 @@ module.exports = {
     createSupplier,
     tempSuppliersDb // Lo exportamos para que el controlador de productos pueda verificar si existe un proveedor
 };
-
-
-const express = require('express');
-const router = express.Router();
-const { getAllSuppliers, createSupplier } = require('../controllers/supplierController');
-const authMiddleware = require('../middlewares/authMiddleware');
-
-// Ver proveedores puede ser público o para el staff
-router.get('/', getAllSuppliers);
-
-// Registrar un nuevo proveedor requiere estar autenticado en el sistema
-router.post('/', authMiddleware, createSupplier);
-
-module.exports = router;

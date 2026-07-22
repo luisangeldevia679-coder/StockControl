@@ -1,5 +1,4 @@
-export const categoryRepository from '../repositories/categoryRepository.js';
-
+const categoryRepository = require('../repositories/categoryRepository.js');
 const getAll = () => {
     return categoryRepository.findAll();
 };

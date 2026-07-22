@@ -1,82 +1,52 @@
-// userController.js - Controlador para la gestión de usuarios y autenticación
-const User = require('../models/userModel'); // Importar el modelo de usuario
-const jwt = require('jsonwebtoken');         // Para manejar tokens de acceso
+const users = [];
 
-// Generar un Token JWT
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
-};
+const publicUser = (user) => ({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role
+});
 
-const userController = {
-    // 1. Registrar un nuevo usuario (Admin, Vendedor, Gestor de stock)
-    registerUser: async (req, res) => {
-        const { name, email, password, role } = req.body;
-        try {
-            const userExists = await User.findOne({ email });
-            if (userExists) {
-                return res.status(400).json({ message: 'El usuario ya existe' });
-            }
+const registerUser = (req, res) => {
+    const { name, email, password, role = 'staff' } = req.body;
 
-            const user = await User.create({ name, email, password, role });
-            if (user) {
-                res.status(201).json({
-                    _id: user._id,
-                    name: user.name,
-                    email: user.email,
-                    role: user.role,
-                    token: generateToken(user._id)
-                });
-            }
-        } catch (error) {
-            res.status(500).json({ message: 'Error en el servidor al registrar' });
-        }
-    },
-
-    // 2. Iniciar sesión (Autenticación)
-    loginUser: async (req, res) => {
-        const { email, password } = req.body;
-        try {
-            const user = await User.findOne({ email });
-            if (user && (await user.matchPassword(password))) {
-                res.json({
-                    _id: user._id,
-                    name: user.name,
-                    email: user.email,
-                    role: user.role,
-                    token: generateToken(user._id)
-                });
-            } else {
-                res.status(401).json({ message: 'Credenciales inválidas' });
-            }
-        } catch (error) {
-            res.status(500).json({ message: 'Error en el servidor al iniciar sesión' });
-        }
-    },
-
-    // 3. Obtener el perfil del usuario actual (Ruta protegida)
-    getUserProfile: async (req, res) => {
-        try {
-            const user = await User.findById(req.user._id).select('-password');
-            if (user) {
-                res.json(user);
-            } else {
-                res.status(404).json({ message: 'Usuario no encontrado' });
-            }
-        } catch (error) {
-            res.status(500).json({ message: 'Error al obtener el perfil' });
-        }
-    },
-
-    // 4. Obtener todos los usuarios (Solo accesible por Administradores)
-    getUsers: async (req, res) => {
-        try {
-            const users = await User.find({}).select('-password');
-            res.json(users);
-        } catch (error) {
-            res.status(500).json({ message: 'Error al obtener usuarios' });
-        }
+    if (!name || !email || !password) {
+        return res.status(400).json({ message: 'Nombre, correo y contraseña son obligatorios' });
     }
+
+    if (users.some((user) => user.email === email)) {
+        return res.status(400).json({ message: 'El usuario ya existe' });
+    }
+
+    const user = { id: users.length + 1, name, email, password, role };
+    users.push(user);
+
+    return res.status(201).json({ ...publicUser(user), token: 'token123' });
 };
 
-module.exports = userController;
+const loginUser = (req, res) => {
+    const { email, password } = req.body;
+    const user = users.find((candidate) => candidate.email === email && candidate.password === password);
+
+    if (!user) {
+        return res.status(401).json({ message: 'Credenciales inválidas' });
+    }
+
+    return res.json({ ...publicUser(user), token: 'token123' });
+};
+
+const getUserProfile = (req, res) => {
+    const userId = req.usuario && req.usuario.id;
+    const user = users.find((candidate) => candidate.id === userId);
+
+    if (!user) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    return res.json(publicUser(user));
+};
+
+const getUsers = (req, res) => res.json(users.map(publicUser));
+
+module.exports = { registerUser, loginUser, getUserProfile, getUsers };
 
