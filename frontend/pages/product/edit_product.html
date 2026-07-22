@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Editar Producto | StockControl</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- FontAwesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="../../assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="../../assets/css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="../../assets/css/products.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- ==========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-cubes"></i>
+
+            <span>StockControl</span>
+
+        </div>
+
+        <ul class="menu">
+
+            <li>
+
+                <a href="../dashboard/dashboard.html">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="products.html">
+
+                    <i class="fa-solid fa-box"></i>
+
+                    Productos
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../categories/categories.html">
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                    Categorías
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../suppliers/suppliers.html">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    Proveedores
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../profile/profile.html">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    Perfil
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ==========================
+         CONTENIDO
+    ========================== -->
+
+    <main class="content">
+
+        <!-- Navbar -->
+
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm rounded-3 mb-4">
+
+            <div class="container-fluid">
+
+                <h4 class="fw-bold mb-0">
+
+                    Editar Producto
+
+                </h4>
+
+            </div>
+
+        </nav>
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+<!-- =======================================
+     FORMULARIO
+======================================= -->
+
+<div class="col-lg-8">
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-warning text-dark">
+
+            <h5 class="mb-0">
+
+                <i class="fa-solid fa-pen-to-square"></i>
+
+                Editar información
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <form id="editProductForm">
+
+                <!-- Código y SKU -->
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Código
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productCode"
+                            class="form-control"
+                            value="PRD-0001"
+                            readonly>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            SKU
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="sku"
+                            class="form-control"
+                            value="SKU-001245"
+                            readonly>
+
+                    </div>
+
+                </div>
+
+                <!-- Nombre -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Nombre del producto
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="productName"
+                        class="form-control"
+                        value="Mouse Logitech G203"
+                        required>
+
+                </div>
+
+                <!-- Categoría y proveedor -->
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Categoría
+
+                        </label>
+
+                        <select
+                            id="category"
+                            class="form-select">
+
+                            <option>Periféricos</option>
+
+                            <option>Componentes</option>
+
+                            <option>Monitores</option>
+
+                            <option>Almacenamiento</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Proveedor
+
+                        </label>
+
+                        <select
+                            id="supplier"
+                            class="form-select">
+
+                            <option>Logitech</option>
+
+                            <option>HP</option>
+
+                            <option>Samsung</option>
+
+                            <option>Dell</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- Precios -->
+
+                <div class="row">
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="form-label">
+
+                            Precio Compra
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="purchasePrice"
+                            class="form-control"
+                            value="85000">
+
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="form-label">
+
+                            Precio Venta
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="salePrice"
+                            class="form-control"
+                            value="120000">
+
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+
+                        <label class="form-label">
+
+                            Stock
+
+                        </label>
+
+                        <input
+                            type="number"
+                            id="stock"
+                            class="form-control"
+                            value="35">
+
+                    </div>
+
+                </div>
+
+                <!-- Ubicación -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Ubicación
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        class="form-control"
+                        value="Bodega Principal - Estante A3">
+
+                </div>
+
+                <!-- Descripción -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Descripción
+
+                    </label>
+
+                    <textarea
+                        id="description"
+                        class="form-control"
+                        rows="4"
+                        placeholder="Descripción del producto...">Mouse gamer Logitech G203 con iluminación RGB, sensor de alta precisión y conexión USB.</textarea>
+
+                </div>
+
+                <!-- Estado e Imagen -->
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Estado
+
+                        </label>
+
+                        <select
+                            id="status"
+                            class="form-select">
+
+                            <option selected>
+
+                                Activo
+
+                            </option>
+
+                            <option>
+
+                                Inactivo
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+
+                            Imagen del Producto
+
+                        </label>
+
+                        <input
+                            type="file"
+                            id="productImage"
+                            class="form-control"
+                            accept="image/*">
+
+                    </div>
+
+                </div>
+
+                <!-- Botones -->
+
+                <div class="d-flex justify-content-end mt-4">
+
+                    <a
+                        href="products.html"
+                        class="btn btn-secondary me-2">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Cancelar
+
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-warning">
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Guardar Cambios
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>               
+
+<!-- =======================================
+     TARJETA RESUMEN
+======================================= -->
+
+<div class="col-lg-4">
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-primary text-white">
+
+            <h5 class="mb-0">
+
+                <i class="fa-solid fa-box"></i>
+
+                Resumen del Producto
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="text-center mb-4">
+
+                <img
+
+                    id="previewImage"
+
+                    src="https://placehold.co/300x300?text=Producto"
+
+                    class="img-fluid rounded shadow-sm"
+
+                    style="max-height:250px; object-fit:cover;">
+
+            </div>
+
+            <table class="table table-borderless align-middle">
+
+                <tbody>
+
+                    <tr>
+
+                        <th>Código</th>
+
+                        <td id="summaryCode">
+
+                            PRD-0001
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>SKU</th>
+
+                        <td id="summarySku">
+
+                            SKU-001245
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Categoría</th>
+
+                        <td id="summaryCategory">
+
+                            Periféricos
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Proveedor</th>
+
+                        <td id="summarySupplier">
+
+                            Logitech
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Precio</th>
+
+                        <td id="summaryPrice">
+
+                            $120.000
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Stock</th>
+
+                        <td id="summaryStock">
+
+                            35 unidades
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Estado</th>
+
+                        <td>
+
+                            <span
+                                id="summaryStatus"
+                                class="badge bg-success">
+
+                                Activo
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="../../assets/js/edit-product.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

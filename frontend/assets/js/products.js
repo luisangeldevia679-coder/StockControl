@@ -243,3 +243,15 @@ console.log(error);
 }
 
 cargarProductos();
+
+await fetch(
+
+`/api/products/${id}`,
+
+{
+
+method:"DELETE"
+
+}
+
+)

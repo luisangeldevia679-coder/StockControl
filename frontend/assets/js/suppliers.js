@@ -3,319 +3,203 @@
 // suppliers.js
 // ======================================
 
-// -----------------------------
+// ==========================
+// CONFIGURACIÓN API
+// ==========================
+
+const API_URL =
+    "http://localhost:3000/api/suppliers";
+
+// ==========================
 // ELEMENTOS
-// -----------------------------
+// ==========================
 
-const btnNuevoProveedor =
-document.getElementById("btnNuevoProveedor");
+const tableBody =
+    document.getElementById("suppliersTable");
 
-const modalProveedor =
-new bootstrap.Modal(
-document.getElementById("modalProveedor")
-);
+const searchInput =
+    document.getElementById("searchSupplier");
 
-const formulario =
-document.getElementById("supplierForm");
+// ==========================
+// CARGAR PROVEEDORES
+// ==========================
 
-const tbody =
-document.querySelector("tbody");
+async function loadSuppliers() {
 
-const buscador =
-document.getElementById("buscarProveedor");
+    try {
 
-// -----------------------------
-// ABRIR MODAL
-// -----------------------------
+        const response =
+            await fetch(API_URL);
 
-btnNuevoProveedor.addEventListener("click",()=>{
+        if (!response.ok) {
 
-formulario.reset();
+            throw new Error(
+                "No fue posible obtener los proveedores."
+            );
 
-modalProveedor.show();
+        }
 
-});
+        const suppliers =
+            await response.json();
 
-// -----------------------------
-// AGREGAR PROVEEDOR
-// -----------------------------
+        tableBody.innerHTML = "";
 
-formulario.addEventListener("submit",(e)=>{
+        suppliers.forEach(supplier => {
 
-e.preventDefault();
+            tableBody.innerHTML += `
 
-const empresa =
-document.getElementById("empresa").value.trim();
+                <tr>
 
-const contacto =
-document.getElementById("contacto").value.trim();
+                    <td>${supplier.id}</td>
 
-const telefono =
-document.getElementById("telefono").value.trim();
+                    <td>${supplier.company}</td>
 
-const correo =
-document.getElementById("correo").value.trim();
+                    <td>${supplier.contact}</td>
 
-const estado =
-document.getElementById("estado").value;
+                    <td>${supplier.phone}</td>
 
-if(
-empresa==="" ||
-contacto==="" ||
-telefono==="" ||
-correo===""){
+                    <td>${supplier.email}</td>
 
-alert("Complete todos los campos obligatorios.");
+                    <td>${supplier.city}</td>
 
-return;
+                    <td>
+
+                        <span class="badge ${
+
+                            supplier.status === "Activo"
+
+                            ? "bg-success"
+
+                            : "bg-secondary"
+
+                        }">
+
+                            ${supplier.status}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="view_supplier.html?id=${supplier.id}"
+                            class="btn btn-info btn-sm text-white">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </a>
+
+                        <a
+                            href="edit_supplier.html?id=${supplier.id}"
+                            class="btn btn-warning btn-sm">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                        </a>
+
+                        <button
+                            class="btn btn-danger btn-sm"
+                            onclick="deleteSupplier(${supplier.id})">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 
 }
 
-const fila =
-document.createElement("tr");
-
-fila.innerHTML=`
-
-<td>PR00${tbody.children.length+1}</td>
-
-<td>${empresa}</td>
-
-<td>${contacto}</td>
-
-<td>${telefono}</td>
-
-<td>${correo}</td>
-
-<td>
-
-<span class="badge ${
-estado==="Activo"
-?
-"bg-success"
-:
-"bg-secondary"
-}">
-
-${estado}
-
-</span>
-
-</td>
-
-<td>
-
-<button
-class="btn btn-warning btn-sm edit">
-
-<i class="fa-solid fa-pen"></i>
-
-</button>
-
-<button
-class="btn btn-danger btn-sm delete">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</td>
-
-`;
-
-tbody.appendChild(fila);
-
-modalProveedor.hide();
-
-alert("Proveedor registrado correctamente.");
-
-});
-// ======================================
-// EDITAR PROVEEDOR
-// ======================================
-
-document.addEventListener("click",(e)=>{
-
-const editar =
-e.target.closest(".edit");
-
-if(!editar) return;
-
-const fila =
-editar.closest("tr");
-
-const columnas =
-fila.querySelectorAll("td");
-
-document.getElementById("empresa").value =
-columnas[1].textContent;
-
-document.getElementById("contacto").value =
-columnas[2].textContent;
-
-document.getElementById("telefono").value =
-columnas[3].textContent;
-
-document.getElementById("correo").value =
-columnas[4].textContent;
-
-document.getElementById("estado").value =
-columnas[5].textContent.trim();
-
-modalProveedor.show();
-
-formulario.onsubmit=function(event){
-
-event.preventDefault();
-
-columnas[1].textContent =
-document.getElementById("empresa").value;
-
-columnas[2].textContent =
-document.getElementById("contacto").value;
-
-columnas[3].textContent =
-document.getElementById("telefono").value;
-
-columnas[4].textContent =
-document.getElementById("correo").value;
-
-const estado =
-document.getElementById("estado").value;
-
-columnas[5].innerHTML =
-
-`<span class="badge ${
-estado==="Activo"
-?
-"bg-success"
-:
-"bg-secondary"
-}">
-
-${estado}
-
-</span>`;
-
-modalProveedor.hide();
-
-alert("Proveedor actualizado correctamente.");
-
-};
-
-});
-
-// ======================================
+// ==========================
 // ELIMINAR
-// ======================================
+// ==========================
 
-document.addEventListener("click",(e)=>{
+async function deleteSupplier(id) {
 
-const eliminar =
-e.target.closest(".delete");
+    const confirmDelete =
+        confirm("¿Desea eliminar este proveedor?");
 
-if(!eliminar) return;
+    if (!confirmDelete) return;
 
-const confirmar =
-confirm("¿Desea eliminar este proveedor?");
+    try {
 
-if(!confirmar) return;
+        const response =
+            await fetch(
 
-eliminar.closest("tr").remove();
+                `${API_URL}/${id}`,
 
-alert("Proveedor eliminado correctamente.");
+                {
 
-});
+                    method: "DELETE"
 
-// ======================================
+                }
+
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "No fue posible eliminar el proveedor."
+            );
+
+        }
+
+        loadSuppliers();
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+// ==========================
 // BUSCADOR
-// ======================================
+// ==========================
 
-buscador.addEventListener("keyup",()=>{
+searchInput.addEventListener("keyup", () => {
 
-const valor =
-buscador.value.toLowerCase();
+    const value =
+        searchInput.value.toLowerCase();
 
-const filas =
-document.querySelectorAll("tbody tr");
+    const rows =
+        tableBody.querySelectorAll("tr");
 
-filas.forEach(fila=>{
+    rows.forEach(row => {
 
-const texto =
-fila.innerText.toLowerCase();
+        row.style.display =
 
-fila.style.display =
-texto.includes(valor)
-?
-""
-:
-"none";
+            row.innerText
+                .toLowerCase()
+                .includes(value)
 
-});
+            ? ""
 
-});
+            : "none";
 
-// ======================================
-// VALIDACIÓN TELÉFONO
-// ======================================
-
-document.getElementById("telefono")
-.addEventListener("input",function(){
-
-this.value =
-this.value.replace(/\D/g,"");
+    });
 
 });
 
-// ======================================
-// VALIDACIÓN CORREO
-// ======================================
+// ==========================
+// INICIAR
+// ==========================
 
-document.getElementById("correo")
-.addEventListener("blur",function(){
+window.addEventListener("DOMContentLoaded", () => {
 
-const correo =
-this.value;
-
-const regex =
-/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-if(
-correo!=="" &&
-!regex.test(correo)
-){
-
-alert("Ingrese un correo válido.");
-
-this.focus();
-
-}
+    loadSuppliers();
 
 });
-
-// ======================================
-// FUTURA CONEXIÓN API
-// ======================================
-
-async function cargarProveedores(){
-
-try{
-
-const respuesta =
-await fetch("http://localhost:3000/api/suppliers");
-
-if(!respuesta.ok) return;
-
-const datos =
-await respuesta.json();
-
-console.log(datos);
-
-}catch(error){
-
-console.error(error);
-
-}
-
-}
-
-// cargarProveedores();

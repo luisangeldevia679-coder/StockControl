@@ -2,13 +2,25 @@
 // CONFIGURACIÓN API
 // ==========================
 
-const API_URL = "http://localhost:3000/api/auth/login";
+const BASE_URL =
+"http://localhost:3000/api";
+
+const API_URL =
+`${BASE_URL}/auth/login`;
 
 // ==========================
 // FORMULARIO
 // ==========================
 
 const loginForm = document.getElementById("loginForm");
+
+if (!loginForm) {
+
+    console.error(
+        "No se encontró el formulario de login."
+    );
+
+}
 
 // ==========================
 // MENSAJES
@@ -102,7 +114,20 @@ loginForm.addEventListener("submit", async (e) => {
 
         });
 
-        const data = await response.json();
+        let data = {};
+
+        try {
+
+            data = await response.json();
+
+        } catch {
+
+            data = {
+                message:
+                "Respuesta inválida del servidor."
+            };
+
+        }
 
         if (!response.ok) {
 
@@ -138,13 +163,22 @@ loginForm.addEventListener("submit", async (e) => {
 
     } catch (error) {
 
-        showMessage(error.message);
+        showMessage(
+
+            error.message ||
+
+            "No fue posible conectar con el servidor."
+
+        );
 
         console.error(error);
 
     }
 
 });
+
+const role =
+localStorage.getItem("role");
 
 // ==========================
 // RECORDAR USUARIO
@@ -264,12 +298,17 @@ togglePassword.addEventListener(
 // ==========================
 
 const token =
-    localStorage.getItem("token");
+localStorage.getItem("token");
 
-if (token) {
+if (
 
-    console.log(
-        "Usuario autenticado"
-    );
+    token &&
+
+    token !== "undefined"
+
+) {
+
+    window.location.href =
+    "../dashboard/dashboard.html";
 
 }

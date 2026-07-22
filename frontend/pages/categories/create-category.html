@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Nueva Categoría | StockControl</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="../../assets/css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="../../assets/css/categories.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<main class="content">
+
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm rounded-3 mb-4">
+
+        <div class="container-fluid">
+
+            <h4 class="fw-bold mb-0">
+
+                Nueva Categoría
+
+            </h4>
+
+        </div>
+
+    </nav>
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-lg-8">
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-primary text-white">
+
+            <h5 class="mb-0">
+
+                <i class="fa-solid fa-layer-group"></i>
+
+                Información de la Categoría
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <form id="createCategoryForm">
+                <div class="mb-3">
+
+    <label class="form-label">
+
+        Nombre
+
+    </label>
+
+    <input
+
+        type="text"
+
+        class="form-control"
+
+        id="categoryName"
+
+        placeholder="Ej: Periféricos"
+
+        required>
+
+</div>
+
+<div class="mb-3">
+
+    <label class="form-label">
+
+        Descripción
+
+    </label>
+
+    <textarea
+
+        class="form-control"
+
+        id="categoryDescription"
+
+        rows="4"
+
+        placeholder="Describe la categoría..."
+
+        required>
+
+    </textarea>
+
+</div>
+
+<div class="mb-3">
+
+    <label class="form-label">
+
+        Icono
+
+    </label>
+
+    <select
+
+        class="form-select"
+
+        id="categoryIcon">
+
+        <option value="fa-computer-mouse">🖱 Periféricos</option>
+
+        <option value="fa-hard-drive">💾 Almacenamiento</option>
+
+        <option value="fa-memory">⚙ Componentes</option>
+
+        <option value="fa-desktop">🖥 Monitores</option>
+
+        <option value="fa-network-wired">🌐 Redes</option>
+
+        <option value="fa-print">🖨 Impresoras</option>
+
+        <option value="fa-headphones">🎧 Audio</option>
+
+    </select>
+
+</div>
+
+<div class="mb-3">
+
+    <label class="form-label">
+
+        Estado
+
+    </label>
+
+    <select
+
+        class="form-select"
+
+        id="categoryStatus">
+
+        <option selected>
+
+            Activa
+
+        </option>
+
+        <option>
+
+            Inactiva
+
+        </option>
+
+    </select>
+
+</div>
+
+<!-- Color -->
+
+<div class="mb-3">
+
+    <label class="form-label">
+
+        Color identificador
+
+    </label>
+
+    <input
+        type="color"
+        id="categoryColor"
+        class="form-control form-control-color"
+        value="#0d6efd">
+
+</div>
+
+<!-- Observaciones -->
+
+<div class="mb-3">
+
+    <label class="form-label">
+
+        Observaciones
+
+    </label>
+
+    <textarea
+        id="categoryNotes"
+        class="form-control"
+        rows="4"
+        placeholder="Información adicional de la categoría..."></textarea>
+
+</div>
+
+<!-- Botones -->
+
+<div class="d-flex justify-content-end mt-4">
+
+    <a
+        href="categories.html"
+        class="btn btn-secondary me-2">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Cancelar
+
+    </a>
+
+    <button
+        type="submit"
+        class="btn btn-primary">
+
+        <i class="fa-solid fa-floppy-disk"></i>
+
+        Guardar Categoría
+
+    </button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+<div class="col-lg-4">
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-primary text-white">
+
+            <h5 class="mb-0">
+
+                <i class="fa-solid fa-layer-group"></i>
+
+                Resumen
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="text-center mb-4">
+
+                <i
+                    id="previewIcon"
+                    class="fa-solid fa-layer-group"
+                    style="font-size:90px;color:#0d6efd;"></i>
+
+            </div>
+
+            <table class="table table-borderless">
+
+                <tbody>
+
+                    <tr>
+
+                        <th>Nombre</th>
+
+                        <td id="previewName">
+
+                            Sin nombre
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Estado</th>
+
+                        <td>
+
+                            <span
+                                id="previewStatus"
+                                class="badge bg-success">
+
+                                Activa
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Productos</th>
+
+                        <td>
+
+                            0 productos
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Color</th>
+
+                        <td>
+
+                            <div
+                                id="previewColor"
+                                style="width:30px;height:30px;border-radius:50%;background:#0d6efd;"></div>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </div>
+
+</main>
+
+</div>
+
+<!-- JavaScript -->
+
+<script src="../../assets/js/edit-category.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

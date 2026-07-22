@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Editar Categoría | StockControl</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="../../assets/css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="../../assets/css/categories.css">
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- ==========================
+            SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-boxes-stacked"></i>
+
+            <h2>StockControl</h2>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="../dashboard/dashboard.html">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../products/products.html">
+
+                    <i class="fa-solid fa-box"></i>
+
+                    Productos
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="categories.html">
+
+                    <i class="fa-solid fa-layer-group"></i>
+
+                    Categorías
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../suppliers/suppliers.html">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    Proveedores
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ==========================
+            CONTENIDO
+    ========================== -->
+
+    <main class="content">
+
+        <!-- Navbar -->
+
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm rounded-3 mb-4">
+
+            <div class="container-fluid">
+
+                <h4 class="fw-bold mb-0">
+
+                    Editar Categoría
+
+                </h4>
+
+            </div>
+
+        </nav>
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <!-- ==========================
+                        FORMULARIO
+                ========================== -->
+
+                <div class="col-lg-8">
+
+                    <div class="card shadow-sm border-0">
+
+                        <div class="card-header bg-warning text-dark">
+
+                            <h5 class="mb-0">
+
+                                <i class="fa-solid fa-pen-to-square"></i>
+
+                                Editar información
+
+                            </h5>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <form id="editCategoryForm">
+
+<!-- Nombre -->
+
+<div class="mb-3">
+
+    <label class="form-label">
+
+        Nombre de la categoría
+
+    </label>
+
+    <input
+        type="text"
+        id="categoryName"
+        class="form-control"
+        value="Periféricos"
+        required>
+
+</div>
+
+<!-- Descripción -->
+
+<div class="mb-3">
+
+    <label class="form-label">
+
+        Descripción
+
+    </label>
+
+    <textarea
+        id="categoryDescription"
+        class="form-control"
+        rows="4"
+        required>Mouse, teclados, webcams y demás accesorios para computador.</textarea>
+
+</div>
+
+<!-- Icono y Estado -->
+
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+
+            Icono
+
+        </label>
+
+        <select
+            id="categoryIcon"
+            class="form-select">
+
+            <option selected value="fa-computer-mouse">
+
+                🖱 Periféricos
+
+            </option>
+
+            <option value="fa-hard-drive">
+
+                💾 Almacenamiento
+
+            </option>
+
+            <option value="fa-memory">
+
+                ⚙ Componentes
+
+            </option>
+
+            <option value="fa-desktop">
+
+                🖥 Monitores
+
+            </option>
+
+            <option value="fa-network-wired">
+
+                🌐 Redes
+
+            </option>
+
+            <option value="fa-print">
+
+                🖨 Impresoras
+
+            </option>
+
+            <option value="fa-headphones">
+
+                🎧 Audio
+
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+
+            Estado
+
+        </label>
+
+        <select
+            id="categoryStatus"
+            class="form-select">
+
+            <option selected>
+
+                Activa
+
+            </option>
+
+            <option>
+
+                Inactiva
+
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+<!-- Color -->
+
+<div class="mb-3">
+
+    <label class="form-label">
+
+        Color identificador
+
+    </label>
+
+    <input
+        type="color"
+        id="categoryColor"
+        class="form-control form-control-color"
+        value="#0d6efd">
+
+</div>
+
+<!-- Productos -->
+
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+
+            Productos asociados
+
+        </label>
+
+        <input
+            type="number"
+            class="form-control"
+            value="35"
+            readonly>
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+
+            Fecha de creación
+
+        </label>
+
+        <input
+            type="date"
+            class="form-control"
+            value="2026-07-20"
+            readonly>
+
+    </div>
+
+</div>
+
+<!-- Observaciones -->
+
+<div class="mb-3">
+
+    <label class="form-label">
+
+        Observaciones
+
+    </label>
+
+    <textarea
+        id="categoryNotes"
+        class="form-control"
+        rows="4"
+        placeholder="Observaciones sobre la categoría...">Categoría principal utilizada para almacenar todos los periféricos del inventario.</textarea>
+
+</div>
+
+<!-- Botones -->
+
+<div class="d-flex justify-content-end mt-4">
+
+    <a
+        href="categories.html"
+        class="btn btn-secondary me-2">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Cancelar
+
+    </a>
+
+    <button
+        type="submit"
+        class="btn btn-warning">
+
+        <i class="fa-solid fa-floppy-disk"></i>
+
+        Guardar Cambios
+
+    </button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+        TARJETA RESUMEN
+========================== -->
+
+<div class="col-lg-4">
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-primary text-white">
+
+            <h5 class="mb-0">
+
+                <i class="fa-solid fa-layer-group"></i>
+
+                Resumen de la Categoría
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="text-center mb-4">
+
+                <div
+                    class="rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-sm"
+                    id="previewBackground"
+                    style="width:140px;
+                           height:140px;
+                           background:#0d6efd;">
+
+                    <i
+                        id="previewIcon"
+                        class="fa-solid fa-computer-mouse text-white"
+                        style="font-size:60px;"></i>
+
+                </div>
+
+            </div>
+
+            <table class="table table-borderless align-middle">
+
+                <tbody>
+
+                    <tr>
+
+                        <th>Nombre</th>
+
+                        <td id="previewName">
+
+                            Periféricos
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Estado</th>
+
+                        <td>
+
+                            <span
+                                id="previewStatus"
+                                class="badge bg-success">
+
+                                Activa
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Productos</th>
+
+                        <td>
+
+                            35 productos
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Color</th>
+
+                        <td>
+
+                            <div
+                                id="previewColor"
+                                style="width:35px;
+                                       height:35px;
+                                       border-radius:50%;
+                                       background:#0d6efd;
+                                       border:2px solid #dee2e6;">
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Creada</th>
+
+                        <td>
+
+                            20/07/2026
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Última edición</th>
+
+                        <td>
+
+                            22/07/2026
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <hr>
+
+            <div class="alert alert-light border">
+
+                <strong>
+
+                    Información
+
+                </strong>
+
+                <p class="mb-0 mt-2 text-muted">
+
+                    Esta categoría agrupa todos los periféricos del inventario, facilitando la organización y búsqueda de productos.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

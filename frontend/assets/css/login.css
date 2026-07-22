@@ -370,3 +370,11 @@ align-items:flex-start;
 }
 
 }
+
+.login-card{
+
+    max-width:520px;
+
+    width:100%;
+
+}

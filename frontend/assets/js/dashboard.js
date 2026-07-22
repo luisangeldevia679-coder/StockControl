@@ -3,6 +3,16 @@
 // Dashboard.js
 // ==========================
 
+const token =
+localStorage.getItem("token");
+
+if(!token){
+
+window.location.href =
+"../auth/login.html";
+
+}
+
 // --------------------------
 // FECHA Y HORA
 // --------------------------
@@ -111,6 +121,8 @@ if (cerrarSesion) {
 
             localStorage.removeItem("user");
 
+            localStorage.removeItem("role");
+
             window.location.href =
                 "../../index.html";
 
@@ -124,8 +136,18 @@ if (cerrarSesion) {
 // INFORMACIÓN DEL USUARIO
 // --------------------------
 
-const usuario =
-    JSON.parse(localStorage.getItem("user"));
+let usuario = null;
+
+try {
+
+    usuario =
+        JSON.parse(localStorage.getItem("user"));
+
+} catch {
+
+    usuario = null;
+
+}
 
 if (usuario) {
 
@@ -148,3 +170,5 @@ if (usuario) {
             usuario.email || "admin@stockcontrol.com";
 
     }
+
+}
