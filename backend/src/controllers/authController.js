@@ -1,5 +1,3 @@
-export const authService from '../service/authService.js';
-
 // 1. REGISTRO
 const register = async (req, res, next) => {
     try {

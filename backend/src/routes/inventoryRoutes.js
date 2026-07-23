@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const { handleTransaction, getInventoryLog } = require('../controllers/inventoryController');
 const { verificarToken } = require('../middlewares/authMiddleware');
 

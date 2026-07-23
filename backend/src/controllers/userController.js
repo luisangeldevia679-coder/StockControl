@@ -1,52 +1,42 @@
-const users = [];
+﻿const authService = require('../service/authService');
 
-const publicUser = (user) => ({
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    role: user.role
-});
-
-const registerUser = (req, res) => {
-    const { name, email, password, role = 'staff' } = req.body;
-
-    if (!name || !email || !password) {
-        return res.status(400).json({ message: 'Nombre, correo y contraseña son obligatorios' });
-    }
-
-    if (users.some((user) => user.email === email)) {
-        return res.status(400).json({ message: 'El usuario ya existe' });
-    }
-
-    const user = { id: users.length + 1, name, email, password, role };
-    users.push(user);
-
-    return res.status(201).json({ ...publicUser(user), token: 'token123' });
+const registerUser = async (req, res, next) => {
+  try {
+    const result = await authService.registerUser(req.body);
+    return res.status(201).json({ success: true, ...result });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const loginUser = (req, res) => {
-    const { email, password } = req.body;
-    const user = users.find((candidate) => candidate.email === email && candidate.password === password);
+const loginUser = async (req, res, next) => {
+  try {
+    const result = await authService.loginUser(req.body);
+    return res.status(200).json({ success: true, ...result });
+  } catch (error) {
+    next(error);
+  }
+};
 
+const getUserProfile = async (req, res, next) => {
+  try {
+    const user = await authService.getUserProfile(req.user.id);
     if (!user) {
-        return res.status(401).json({ message: 'Credenciales inválidas' });
+      return res.status(404).json({ success: false, message: 'Usuario no encontrado' });
     }
-
-    return res.json({ ...publicUser(user), token: 'token123' });
+    return res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const getUserProfile = (req, res) => {
-    const userId = req.usuario && req.usuario.id;
-    const user = users.find((candidate) => candidate.id === userId);
-
-    if (!user) {
-        return res.status(404).json({ message: 'Usuario no encontrado' });
-    }
-
-    return res.json(publicUser(user));
+const getUsers = async (req, res, next) => {
+  try {
+    const users = await authService.getAllUsers();
+    return res.status(200).json({ success: true, data: users });
+  } catch (error) {
+    next(error);
+  }
 };
-
-const getUsers = (req, res) => res.json(users.map(publicUser));
 
 module.exports = { registerUser, loginUser, getUserProfile, getUsers };
-

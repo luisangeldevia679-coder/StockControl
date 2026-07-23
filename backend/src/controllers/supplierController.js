@@ -1,66 +1,57 @@
-const Supplier = require('../models/Supplier');
+﻿const supplierService = require('../service/supplierService');
 
-// Base de datos temporal en memoria para proveedores
-let tempSuppliersDb = [
-    { id: 101, name: "Carlos Mendoza", companyName: "Distribuidora Tech S.A.", email: "contacto@techsa.com", phone: "+123456789", isActive: true },
-    { id: 102, name: "Ana Rodríguez", companyName: "Mundo Visual Corp", email: "ventas@mundovisual.com", phone: "+987654321", isActive: true }
-];
+const getAllSuppliers = async (req, res, next) => {
+  try {
+    const suppliers = await supplierService.getAll();
+    return res.status(200).json({ success: true, count: suppliers.length, data: suppliers });
+  } catch (error) {
+    next(error);
+  }
+};
 
-/**
- * @desc    Obtener lista de todos los proveedores activos
- * @route   GET /api/suppliers
- */
-const getAllSuppliers = (req, res, next) => {
-    try {
-        const activeSuppliers = tempSuppliersDb.filter(s => s.isActive);
-        res.status(200).json({
-            success: true,
-            count: activeSuppliers.length,
-            data: activeSuppliers
-        });
-    } catch (error) {
-        next(error);
+const getSupplier = async (req, res, next) => {
+  try {
+    const supplier = await supplierService.getById(req.params.id);
+    if (!supplier) {
+      return res.status(404).json({ success: false, message: 'Proveedor no encontrado' });
     }
+    return res.status(200).json({ success: true, data: supplier });
+  } catch (error) {
+    next(error);
+  }
 };
 
-/**
- * @desc    Crear un nuevo proveedor en el sistema
- * @route   POST /api/suppliers
- */
-const createSupplier = (req, res, next) => {
-    try {
-        const { name, companyName, email, phone } = req.body;
+const createSupplier = async (req, res, next) => {
+  try {
+    const supplier = await supplierService.createNew(req.body);
+    return res.status(201).json({ success: true, message: 'Proveedor creado correctamente', data: supplier });
+  } catch (error) {
+    next(error);
+  }
+};
 
-        // Validaciones básicas manuales (puedes usar tu validationMiddleware más adelante)
-        if (!name || !companyName || !email) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'El nombre, la empresa y el correo son campos obligatorios.' 
-            });
-        }
-
-        const newSupplier = new Supplier({
-            id: tempSuppliersDb.length + 101, // Para que empiece en el ID 103, 104...
-            name,
-            companyName,
-            email,
-            phone
-        });
-
-        tempSuppliersDb.push(newSupplier);
-
-        res.status(201).json({
-            success: true,
-            message: 'Proveedor registrado exitosamente',
-            data: newSupplier
-        });
-    } catch (error) {
-        next(error);
+const updateSupplier = async (req, res, next) => {
+  try {
+    const supplier = await supplierService.updateExisting(req.params.id, req.body);
+    if (!supplier) {
+      return res.status(404).json({ success: false, message: 'Proveedor no encontrado' });
     }
+    return res.status(200).json({ success: true, message: 'Proveedor actualizado correctamente', data: supplier });
+  } catch (error) {
+    next(error);
+  }
 };
 
-module.exports = {
-    getAllSuppliers,
-    createSupplier,
-    tempSuppliersDb // Lo exportamos para que el controlador de productos pueda verificar si existe un proveedor
+const deleteSupplier = async (req, res, next) => {
+  try {
+    const deleted = await supplierService.remove(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ success: false, message: 'Proveedor no encontrado' });
+    }
+    return res.status(200).json({ success: true, message: 'Proveedor eliminado correctamente' });
+  } catch (error) {
+    next(error);
+  }
 };
+
+module.exports = { getAllSuppliers, getSupplier, createSupplier, updateSupplier, deleteSupplier };

@@ -1,7 +1,7 @@
 const express = require('express');
-const cors = require('cors'); // ¡Para conectar con el frontend!
+const path = require('path');
+const cors = require('cors');
 
-// 1. Importar tus rutas
 const categoryRoutes = require('./routes/categoryRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -12,13 +12,15 @@ const errorMiddleware = require('./middlewares/errorMiddleware');
 
 const app = express();
 
-// 2. Middlewares globales
-app.use(cors()); // Permite peticiones de otros puertos
-app.use(express.json()); // Permite leer los datos enviados en formato JSON
+app.use(cors());
+app.use(express.json());
 
-// 3. Unir las Rutas
-// Le decimos a Express que cualquier petición que empiece con '/api/categories' 
-// debe ser manejada por las rutas que importamos.
+app.use(express.static(path.join(__dirname, '../../frontend')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/index.html'));
+});
+
 app.use('/api/categories', categoryRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
@@ -28,6 +30,4 @@ app.use('/api/inventory', inventoryRoutes);
 
 app.use(errorMiddleware);
 
-// 4. Exportar o inicializar la app
-module.exports = app; 
-// (Luego en otro archivo como server.js, o al final de este, haces app.listen(3000))
+module.exports = app;
