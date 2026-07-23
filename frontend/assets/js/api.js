@@ -1,27 +1,23 @@
-const API="http://localhost:3000/api";
+﻿const API_URL = 'http://localhost:3000/api';
 
-async function getProducts(){
-
-const response=await fetch(`${API}/products`);
-
-return await response.json();
-
+function getAuthHeaders() {
+  const token = localStorage.getItem('token');
+  return {
+    'Content-Type': 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {})
+  };
 }
 
-async function createProduct(data){
-
-return await fetch(`${API}/products`,{
-
-method:"POST",
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify(data)
-
-});
-
+async function request(path, options = {}) {
+  const response = await fetch(`${API_URL}${path}`, {
+    ...options,
+    headers: { ...getAuthHeaders(), ...(options.headers || {}) }
+  });
+  const data = await response.json().catch(() => ({ success: false, message: 'Respuesta inválida del servidor.' }));
+  if (!response.ok) {
+    throw new Error(data.message || 'Error en la solicitud');
+  }
+  return data;
 }
+
+window.stockControlApi = { request };

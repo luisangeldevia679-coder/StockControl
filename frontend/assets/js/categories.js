@@ -1,184 +1,20 @@
-// ======================================
-// STOCKCONTROL ERP
-// categories.js
-// ======================================
-
-// -----------------------------
-// ELEMENTOS
-// -----------------------------
-
-const btnNuevaCategoria =
-document.getElementById("btnNuevaCategoria");
-
-const modalCategoria =
-new bootstrap.Modal(
-document.getElementById("modalCategoria")
-);
-
-const formulario =
-document.getElementById("categoryForm");
-
-const tbody =
-document.querySelector("tbody");
-
-// -----------------------------
-// ABRIR MODAL
-// -----------------------------
-
-btnNuevaCategoria.addEventListener("click",()=>{
-
-formulario.reset();
-
-modalCategoria.show();
-
-});
-
-// -----------------------------
-// AGREGAR CATEGORÍA
-// -----------------------------
-
-formulario.addEventListener("submit",(e)=>{
-
-e.preventDefault();
-
-const nombre =
-formulario.querySelector("input").value;
-
-const descripcion =
-formulario.querySelector("textarea").value;
-
-const fila =
-document.createElement("tr");
-
-fila.innerHTML=`
-
-<td>C00${tbody.children.length+1}</td>
-
-<td>${nombre}</td>
-
-<td>${descripcion}</td>
-
-<td>0</td>
-
-<td>
-
-<button class="btn btn-warning btn-sm edit">
-
-<i class="fa-solid fa-pen"></i>
-
-</button>
-
-<button class="btn btn-danger btn-sm delete">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-</td>
-
-`;
-
-tbody.appendChild(fila);
-
-modalCategoria.hide();
-
-alert("Categoría agregada correctamente.");
-
-});
-
-// ======================================
-// EDITAR
-// ======================================
-
-document.addEventListener("click",(e)=>{
-
-const editar =
-e.target.closest(".edit");
-
-if(!editar) return;
-
-const fila =
-editar.closest("tr");
-
-const columnas =
-fila.querySelectorAll("td");
-
-const nombreInput =
-formulario.querySelector("input");
-
-const descripcionInput =
-formulario.querySelector("textarea");
-
-nombreInput.value =
-columnas[1].textContent;
-
-descripcionInput.value =
-columnas[2].textContent;
-
-modalCategoria.show();
-
-formulario.onsubmit=function(event){
-
-event.preventDefault();
-
-columnas[1].textContent=
-nombreInput.value;
-
-columnas[2].textContent=
-descripcionInput.value;
-
-modalCategoria.hide();
-
-alert("Categoría actualizada.");
-
-};
-
-});
-// ======================================
-// ELIMINAR
-// ======================================
-
-document.addEventListener("click",(e)=>{
-
-const eliminar =
-e.target.closest(".delete");
-
-if(!eliminar) return;
-
-const confirmar =
-confirm("¿Eliminar esta categoría?");
-
-if(!confirmar) return;
-
-eliminar.closest("tr").remove();
-
-alert("Categoría eliminada.");
-
-});
-
-// ======================================
-// BUSCADOR
-// ======================================
-
-const buscador =
-document.getElementById("buscarCategoria");
-
-buscador.addEventListener("keyup",()=>{
-
-const valor =
-buscador.value.toLowerCase();
-
-const filas =
-document.querySelectorAll("tbody tr");
-
-filas.forEach(fila=>{
-
-const texto =
-fila.innerText.toLowerCase();
-
-fila.style.display=
-texto.includes(valor) ? "" : "none";
-
-});
-
-});
+(async function () {
+  if (!localStorage.getItem('token')) { window.location.href = '../auth/login.html'; return; }
+  const tableBody = document.getElementById('categoryTableBody');
+  const searchInput = document.querySelector('.category-toolbar input');
+  const statusSelect = document.querySelector('.category-toolbar select');
+  if (!tableBody) return;
+  let categories = [];
+  const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
+  const render = () => {
+    const search = (searchInput?.value || '').toLowerCase().trim();
+    const status = statusSelect?.value || 'Todas';
+    const filtered = categories.filter((category) => `${category.name} ${category.description || ''}`.toLowerCase().includes(search) && (status === 'Todas' || status === 'Activas'));
+    if (!filtered.length) { tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No hay categorías registradas.</td></tr>'; return; }
+    tableBody.innerHTML = filtered.map((category) => `<tr><td>${escapeHtml(category.id)}</td><td><i class="fa-solid fa-layer-group fs-4 text-primary"></i></td><td>${escapeHtml(category.name)}</td><td>${escapeHtml(category.description)}</td><td>0</td><td><span class="badge bg-success">Activa</span></td><td><a href="view_category.html?id=${encodeURIComponent(category.id)}" class="btn btn-info btn-sm text-white"><i class="fa-solid fa-eye"></i></a> <a href="edit-category.html?id=${encodeURIComponent(category.id)}" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen"></i></a> <button type="button" class="btn btn-danger btn-sm delete-category" data-id="${escapeHtml(category.id)}"><i class="fa-solid fa-trash"></i></button></td></tr>`).join('');
+  };
+  const load = async () => { try { const response = await window.stockControlApi.request('/categories'); categories = response.data || []; render(); } catch (error) { tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">${escapeHtml(error.message)}</td></tr>`; } };
+  searchInput?.addEventListener('input', render); statusSelect?.addEventListener('change', render);
+  tableBody.addEventListener('click', async (event) => { const button = event.target.closest('.delete-category'); if (!button || !window.confirm('¿Deseas eliminar esta categoría?')) return; try { await window.stockControlApi.request(`/categories/${button.dataset.id}`, { method: 'DELETE' }); await load(); } catch (error) { window.alert(error.message); } });
+  await load();
+})();

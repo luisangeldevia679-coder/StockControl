@@ -162,7 +162,7 @@
 
                 <div class="card-body">
 
-                    <form id="productForm">
+                    <form id="createProductForm">
 
                         <div class="row">
 
@@ -200,7 +200,7 @@
                                     type="text"
                                     class="form-control"
                                     id="productCode"
-                                    name="code"
+                                    name="barcode"
                                     readonly>
 
                             </div>
@@ -217,8 +217,8 @@
 
                                 <select
                                     class="form-select"
-                                    id="category"
-                                    name="category"
+                                    id="category_id"
+                                    name="category_id"
                                     required>
 
                                     <option value="">Seleccione...</option>
@@ -247,8 +247,8 @@
 
                                 <select
                                     class="form-select"
-                                    id="supplier"
-                                    name="supplier"
+                                    id="supplier_id"
+                                    name="supplier_id"
                                     required>
 
                                     <option value="">Seleccione...</option>
@@ -279,7 +279,7 @@
                                     type="number"
                                     class="form-control"
                                     id="purchasePrice"
-                                    name="purchasePrice"
+                                    name="purchase_price"
                                     min="0"
                                     step="0.01"
                                     required>
@@ -300,7 +300,7 @@
                                     type="number"
                                     class="form-control"
                                     id="salePrice"
-                                    name="salePrice"
+                                    name="price"
                                     min="0"
                                     step="0.01"
                                     required>
@@ -363,7 +363,8 @@
 
                                 <select
                                     class="form-select"
-                                    id="status">
+                                    id="status"
+                                    name="status">
 
                                     <option value="Activo">
 
@@ -396,6 +397,7 @@
                                     class="form-control"
 
                                     id="description"
+                                    name="description"
 
                                     rows="5"
 
@@ -765,6 +767,7 @@
 
 </div>
 
+<script src="../../assets/js/api.js"></script>
 <script src="../../assets/js/create-product.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>

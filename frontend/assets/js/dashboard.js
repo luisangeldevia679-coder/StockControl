@@ -160,7 +160,7 @@ if (usuario) {
     if (nombre) {
 
         nombre.textContent =
-            usuario.nombre || "Administrador";
+            usuario.name || usuario.nombre || "Administrador";
 
     }
 
